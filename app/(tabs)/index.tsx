@@ -10,14 +10,11 @@ import {
 
 const WelcomeScreen = ({ navigation }) => {
   const handleSignUp = () => {
-    // Navigate to SignUpScreen
+
     navigation.navigate('SignUp');
   };
 
-  const handleLogIn = () => {
-    console.log('Log In pressed');
-    // Add your log in logic here
-  };
+ 
 
   return (
     <SafeAreaView style={styles.container}>
