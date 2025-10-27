@@ -14,14 +14,20 @@ export default function WelcomeScreen() {
   const router = useRouter();
 
   const handleSignUp = () => {
-    // Navigate to SignUpScreen
-    navigation.navigate('SignUp');
+<<<<<<< HEAD
+    router.push('/SignupScreen');
   };
 
   const handleLogIn = () => {
-    console.log('Log In pressed');
-    // Add your log in logic here
+    router.push('/LoginScreen');
   };
+=======
+
+    navigation.navigate('SignUp');
+  };
+
+ 
+>>>>>>> 2e38a868f2d2d1351dff4edaf8e6ebf43b1b21e3
 
   return (
     <SafeAreaView style={styles.container}>
@@ -141,5 +147,8 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
 });
+<<<<<<< HEAD
+=======
 
 export default WelcomeScreen;
+>>>>>>> 2e38a868f2d2d1351dff4edaf8e6ebf43b1b21e3
