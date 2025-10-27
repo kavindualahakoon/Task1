@@ -1,23 +1,37 @@
+import { useRouter } from 'expo-router';
 import {
-    KeyboardAvoidingView,
-    Platform,
-    SafeAreaView,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  ImageBackground,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const SignUpScreen = () => {
+export default function SignUpScreen() {
+  const router = useRouter();
+
+  const handleSignUp = () => {
+    console.log('Account created');
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView 
+    
+      <ImageBackground
+        source={require('../assets/images/bg-pattern.jpg')}
+        style={styles.topImage}
+        resizeMode="cover"
+      />
+      <KeyboardAvoidingView
         style={styles.keyboardAvoid}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        <ScrollView 
+        <ScrollView
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
@@ -25,91 +39,95 @@ const SignUpScreen = () => {
           
           <View style={styles.header}>
             <Text style={styles.title}>Sign up</Text>
-            <Text style={styles.subtitle}>Create an account</Text>
+            <Text style={styles.subtitle}>Create an account to continue</Text>
           </View>
 
     
           <View style={styles.formContainer}>
-           
             <View style={styles.inputGroup}>
               <Text style={styles.label}>Full name</Text>
-              <View style={styles.inputWrapper}>
-                <TextInput
-                  style={styles.textInput}
-                  placeholder="Name Surname"
-                  placeholderTextColor="#999"
-                />
-              </View>
+              <TextInput
+                style={styles.textInput}
+                placeholder="Name Surname"
+                placeholderTextColor="#999"
+              />
             </View>
-
-          
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Enter your e-mail</Text>
-              <View style={styles.inputWrapper}>
-                <TextInput
-                  style={styles.textInput}
-                  placeholder="email@email.com"
-                  placeholderTextColor="#999"
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                />
-              </View>
-            </View>
-
-         
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Create a username</Text>
-              <View style={styles.inputWrapper}>
-                <TextInput
-                  style={styles.textInput}
-                  placeholder="email@email.com"
-                  placeholderTextColor="#999"
-                  autoCapitalize="none"
-                />
-              </View>
-            </View>
-
 
             <View style={styles.inputGroup}>
-              <Text style={styles.label}>Create your password</Text>
-              <View style={styles.inputWrapper}>
-                <TextInput
-                  style={styles.textInput}
-                  placeholder="**************"
-                  placeholderTextColor="#999"
-                  secureTextEntry={true}
-                />
-              </View>
+              <Text style={styles.label}>Email address</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder="email@email.com"
+                placeholderTextColor="#999"
+                keyboardType="email-address"
+                autoCapitalize="none"
+              />
             </View>
 
-            
             <View style={styles.inputGroup}>
-              <Text style={styles.label}>Repeat password</Text>
-              <View style={styles.inputWrapper}>
-                <TextInput
-                  style={styles.textInput}
-                  placeholder="**************"
-                  placeholderTextColor="#999"
-                  secureTextEntry={true}
-                />
-              </View>
+              <Text style={styles.label}>Username</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder="username"
+                placeholderTextColor="#999"
+                autoCapitalize="none"
+              />
             </View>
 
-            
-            <TouchableOpacity style={styles.signUpButton}>
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>Password</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder="********"
+                placeholderTextColor="#999"
+                secureTextEntry={true}
+              />
+            </View>
+
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>Confirm password</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder="********"
+                placeholderTextColor="#999"
+                secureTextEntry={true}
+              />
+            </View>
+
+           
+            <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
               <Text style={styles.signUpButtonText}>Sign up</Text>
             </TouchableOpacity>
+
+          
+            <Text style={styles.footerText}>
+              Already have an account?{' '}
+              <Text
+                style={styles.linkText}
+                onPress={() => router.push('/LoginScreen')}
+              >
+                Log in
+              </Text>
+            </Text>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
+  },
+  topImage: {
+    width: '100%',
+    height: 200,
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
+    overflow: 'hidden',
+    marginBottom: 0,
   },
   keyboardAvoid: {
     flex: 1,
@@ -117,67 +135,54 @@ const styles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
     paddingHorizontal: 24,
-    paddingVertical: 20,
+    paddingVertical: 40,
   },
   header: {
-    alignItems: 'flex-start',
-    marginTop: 20,
     marginBottom: 40,
+    alignItems: 'center',
   },
   title: {
-    fontSize: 34,
-    fontWeight: 'bold',
+    fontSize: 32,
+    fontWeight: '800',
     color: '#000000',
     marginBottom: 8,
+    textAlign: 'center',
   },
   subtitle: {
-    fontSize: 18,
-    color: '#666666',
+    fontSize: 16,
+    color: '#6B6B6B',
+    textAlign: 'center',
   },
   formContainer: {
     width: '100%',
   },
   inputGroup: {
-    marginBottom: 28,
+    marginBottom: 24,
   },
   label: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: '600',
     color: '#333333',
-    marginBottom: 12,
-  },
-  inputWrapper: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 2,
-    borderColor: '#E9ECEF',
-    borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 2,
+    marginBottom: 8,
   },
   textInput: {
+    backgroundColor: '#F8F8F8',
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+    borderRadius: 14,
     paddingHorizontal: 16,
     paddingVertical: 16,
     fontSize: 16,
     color: '#000000',
   },
   signUpButton: {
-    backgroundColor: '#007AFF',
-    paddingVertical: 18,
-    borderRadius: 12,
+    backgroundColor: '#8B5CF6',
+    paddingVertical: 16,
+    borderRadius: 30,
     alignItems: 'center',
-    marginTop: 20,
-    marginBottom: 40,
-    shadowColor: '#007AFF',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
+    marginBottom: 30,
+    shadowColor: '#8B5CF6',
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 8,
@@ -187,6 +192,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '700',
   },
+  footerText: {
+    fontSize: 14,
+    color: '#6B6B6B',
+    textAlign: 'center',
+  },
+  linkText: {
+    color: '#8B5CF6',
+    fontWeight: '600',
+    textDecorationLine: 'underline',
+  },
 });
-
-export default SignUpScreen;

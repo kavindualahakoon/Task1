@@ -1,5 +1,7 @@
+import { useRouter } from 'expo-router';
 import React from 'react';
 import {
+  ImageBackground,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -8,186 +10,132 @@ import {
   View,
 } from 'react-native';
 
-const WelcomeScreen = ({ navigation }) => {
+export default function WelcomeScreen() {
+  const router = useRouter();
+
   const handleSignUp = () => {
-    // Navigate to SignUpScreen
-    navigation.navigate('SignUp');
+    router.push('/SignupScreen');
   };
 
   const handleLogIn = () => {
-    console.log('Log In pressed');
-    // Add your log in logic here
+    router.push('/LoginScreen');
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView 
-        contentContainerStyle={styles.scrollContent}
+    
+      <ImageBackground
+        source={require('../../assets/images/bg-pattern.jpg')}
+        style={styles.topImage}
+        resizeMode="cover"
+      />
+
+      <ScrollView
+        contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
       >
-        
-        <View style={styles.header}>
-          <View style={styles.iconContainer}>
-            <Text style={styles.icon}>🚀</Text>
-          </View>
-        </View>
-
-        
         <View style={styles.textContainer}>
-          <Text style={styles.welcomeTitle}>Welcome to the app</Text>
-          
-          <Text style={styles.subtitle}>& let's get started</Text>
-          
-          <Text style={styles.description}>
-            This app is the best app, thank you for{'\n'}
-            downloading it. You won't regret using it.
+          <Text style={styles.welcomeText}>Welcome to the app{'\n'}& let’s get started</Text>
+          <Text style={styles.subText}>
+            This app is the best app, thank you for downloading it. You won't regret using it.
           </Text>
         </View>
 
-        
-        <View style={styles.buttonsContainer}>
-          <TouchableOpacity 
-            style={styles.signUpButton}
-            onPress={handleSignUp}
-          >
-            <Text style={styles.signUpButtonText}>Sign up</Text>
+        <View style={styles.buttonGroup}>
+          <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
+            <Text style={styles.signUpText}>Sign up</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity 
-            style={styles.logInButton}
-            onPress={handleLogIn}
-          >
-            <Text style={styles.logInButtonText}>Log in</Text>
+          <TouchableOpacity style={styles.loginButton} onPress={handleLogIn}>
+            <Text style={styles.loginText}>Log in</Text>
           </TouchableOpacity>
         </View>
 
-       
-        <View style={styles.termsContainer}>
-          <Text style={styles.termsText}>
-            By signing up, I agree to the{' '}
-            <Text style={styles.link}>Terms and Conditions</Text>
-            {' '}and{' '}
-            <Text style={styles.link}>Privacy Policy</Text>
-          </Text>
-        </View>
+        <Text style={styles.termsText}>
+          By signing up, I agree to the{' '}
+          <Text style={styles.linkText}>Terms and Conditions</Text> and{' '}
+          <Text style={styles.linkText}>Privacy Policy</Text>.
+        </Text>
       </ScrollView>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
-  scrollContent: {
+  topImage: {
+    width: '100%',
+    height: 200,
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
+    overflow: 'hidden',
+  },
+  scrollContainer: {
     flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingHorizontal: 24,
     paddingVertical: 40,
-    justifyContent: 'space-between',
-  },
-  header: {
-    alignItems: 'center',
-    marginTop: 40,
-    marginBottom: 30,
-  },
-  iconContainer: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: '#F8F9FA',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: '#E9ECEF',
-  },
-  icon: {
-    fontSize: 40,
   },
   textContainer: {
     alignItems: 'center',
-    marginBottom: 50,
+    marginBottom: 40,
   },
-  welcomeTitle: {
-    fontSize: 32,
-    fontWeight: 'bold',
+  welcomeText: {
+    fontSize: 28,
+    fontWeight: '700',
     color: '#000000',
     textAlign: 'center',
     marginBottom: 12,
   },
-  subtitle: {
-    fontSize: 22,
-    fontWeight: '600',
-    color: '#6C757D',
+  subText: {
+    fontSize: 15,
+    color: '#6B6B6B',
     textAlign: 'center',
-    marginBottom: 32,
+    lineHeight: 22,
+    maxWidth: 300,
   },
-  description: {
-    fontSize: 16,
-    color: '#6C757D',
-    textAlign: 'center',
-    lineHeight: 24,
-  },
-  buttonsContainer: {
+  buttonGroup: {
     width: '100%',
-    marginBottom: 30,
+    marginBottom: 40,
   },
   signUpButton: {
-    backgroundColor: '#007AFF',
-    paddingVertical: 18,
-    borderRadius: 14,
+    backgroundColor: '#8B5CF6',
+    paddingVertical: 16,
+    borderRadius: 30,
     alignItems: 'center',
     marginBottom: 16,
-    shadowColor: '#007AFF',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 8,
   },
-  signUpButtonText: {
+  signUpText: {
     color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: '700',
+    fontSize: 17,
+    fontWeight: '600',
   },
-  logInButton: {
-    backgroundColor: '#FFFFFF',
-    paddingVertical: 18,
-    borderRadius: 14,
-    alignItems: 'center',
+  loginButton: {
     borderWidth: 2,
-    borderColor: '#007AFF',
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 4,
-  },
-  logInButtonText: {
-    color: '#007AFF',
-    fontSize: 18,
-    fontWeight: '700',
-  },
-  termsContainer: {
+    borderColor: '#8B5CF6',
+    paddingVertical: 16,
+    borderRadius: 30,
     alignItems: 'center',
-    paddingHorizontal: 20,
+  },
+  loginText: {
+    color: '#8B5CF6',
+    fontSize: 17,
+    fontWeight: '600',
   },
   termsText: {
-    fontSize: 14,
-    color: '#6C757D',
+    fontSize: 13,
+    color: '#6B6B6B',
     textAlign: 'center',
+    paddingHorizontal: 20,
     lineHeight: 20,
   },
-  link: {
-    color: '#007AFF',
+  linkText: {
+    color: '#8B5CF6',
     fontWeight: '600',
     textDecorationLine: 'underline',
   },
 });
-
-export default WelcomeScreen;
