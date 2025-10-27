@@ -14,11 +14,13 @@ export default function WelcomeScreen() {
   const router = useRouter();
 
   const handleSignUp = () => {
-    router.push('/SignupScreen');
+    // Navigate to SignUpScreen
+    navigation.navigate('SignUp');
   };
 
   const handleLogIn = () => {
-    router.push('/LoginScreen');
+    console.log('Log In pressed');
+    // Add your log in logic here
   };
 
   return (
@@ -139,3 +141,5 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
 });
+
+export default WelcomeScreen;
