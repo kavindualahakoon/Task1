@@ -1,15 +1,15 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import {
-  ImageBackground,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
+    ImageBackground,
+    KeyboardAvoidingView,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -110,7 +110,7 @@ export default function LoginScreen() {
               Don’t have an account?{' '}
               <Text
                 style={styles.linkText}
-                onPress={() => router.push('/SignupScreen')}
+                onPress={() => router.replace('/SignupScreen')}
               >
                 Sign up
               </Text>
